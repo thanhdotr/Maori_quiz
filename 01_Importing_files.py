@@ -1,3 +1,4 @@
+#This is a function to try to import the csv file using pandas, an external library
 import pandas as pd
 list1= [["a","ā"],["e","ē"],["i","ī"],["o","ō"],["u","ū"]]
 df = pd.read_csv('Maori Words.csv')
