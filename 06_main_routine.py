@@ -1,5 +1,5 @@
 """Component 6- main routine. Call up other function from the main menu"""
-while not KeyboardInterrupt:
+def main_menu():
     #Hangman title
     print(
     "  ___ ___                                                     ______"
