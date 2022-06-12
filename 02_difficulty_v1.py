@@ -1,4 +1,6 @@
-"""This is the """
+"""This is the function for the players to choose the difficulty of the game. 
+Created by Thanh Do
+11/06/2022"""
 
 def main_function():
     easy = 6
@@ -10,7 +12,7 @@ def main_function():
 
     difficulty = input("Difficulties:\n"
                             "").upper()
-
+    #Set difficulty based on the input of players
     if difficulty == "1":
         main_function().mistakes = easy
         print("You are allowed to have {} wrong!".format(easy))
@@ -26,7 +28,7 @@ def main_function():
     else:
         print(error)
 
-
+#Main function to let the user choose the difficulty of the program. 
 def game_difficulty():
 
     global mistakes, difficulty, error
