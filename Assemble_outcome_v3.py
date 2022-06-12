@@ -347,26 +347,28 @@ def main_menu():
           "2. Statistic\n"
           "3. Help screen\n"
           "4. Quit game\n")
-    choice = input(">> ")
-    choice = input(">> ")
-    try:
-        choice = int(choice)
-        if choice == 1:
-            print(main_game(game_difficulty(), import_and_split()))
-            main_menu()
-            statistics()
-        if choice == 2:
-            statistics()
-            main_menu()
-        if choice == 3:
-            print(Help())
-            main_menu()
-        if choice == 4:
-            print("Thank you for playing the game")
-        else:
-            print()
-    except ValueError:
-        choice = input(">>")
+    valid = False
+    while not valid:
+        error =("choose 1 option")
+        choice = input(">> ")
+        try:
+            choice = int(choice)
+            if choice == 1:
+                print(main_game(game_difficulty(), import_and_split()))
+                main_menu()
+                statistics()
+            if choice == 2:
+                statistics()
+                main_menu()
+            if choice == 3:
+                print(Help())
+                main_menu()
+            if choice == 4:
+                print("Thank you for playing the game")
+            else:
+                print()
+        except ValueError:
+            print(error)
     
 print(main_menu())
 
