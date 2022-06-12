@@ -36,7 +36,7 @@ def import_and_split():
 
 
 def game_difficulty():
-    global mistakes, difficulty, error
+
     # Set up difficulties
     easy = 6
     medium = 3
@@ -76,6 +76,7 @@ def game_difficulty():
 
 
 def main_game(mistakes, imported_lists):
+    global word_length,attempt
     mistakes = int(mistakes)
     images = ['''
                 ___________.._______
@@ -273,9 +274,9 @@ def main_game(mistakes, imported_lists):
         if mistakes == 6:
             print(images[attempt])
         elif mistakes == 3:
-            print(images[attempt*2])
+            print(images[attempt+2])
         elif mistakes == 2:
-            print(images[attempt*3])
+            print(images[attempt+3])
         # When there is no "_", say that the user wins.
         if "_" not in display:
             end_of_game = True
@@ -286,7 +287,7 @@ def main_game(mistakes, imported_lists):
                   "/ ____|\____/|____/    \/\_/ |__|___|  / \n"
                   "\/                                   \/ \n"
                   f"The word is {chosen_word}")
-            return correct, word_length
+
 
     # If user have not win, print the word
     if end_of_game is False:
@@ -298,12 +299,12 @@ def main_game(mistakes, imported_lists):
               "\/                                   \/     \/ \n"
               "\n"
               f"The word is {chosen_word}")
-        return correct, word_length
+    statistics()
+    input("Press enter to return to main menu")
 
 
-def statistics(main_routine):
-    attempt = main_routine[0]
-    word_length = main_routine[1]
+
+def statistics():
     stats_list = []
     total_list = []
     percentage = 1 - (attempt - 1) / word_length
@@ -311,9 +312,59 @@ def statistics(main_routine):
     stats_list.append(word_length)
     stats_list.append(round(percentage, 2))
     total_list.append(stats_list)
-    for i in range(len(total_list)):
-        print(f"Player {i} got {attempt} wrong in a word with"
-              f" {word_length} letters with an accuracy of {percentage * 100}%")
+    if total_list :
+        for i in range(len(total_list)):
+            print(f"Player {i} got {attempt} wrong in a word with"
+                  f" {word_length} letters with an accuracy of {percentage * 100}%")
+def Help():
+    input("Hangman for Maori Language\n"
+          "- You have been given a word.\n"
+          "- You need to guess its letters.\n"
+          "- You can only enter 1 letter each guess.\n"
+          "Note: to change your language to maori to do the macron, go to \n"
+          "https://tekete.ara.ac.nz/file/fa9a9b38-aa9d-44a6-8464-e2e64ddd3842/4/Formatting-Maori-keyboard.pdf\n"
+     "Press Enter to go back to the main menu")
+    return ""
 
+def main_menu():
 
-main_game(game_difficulty(), import_and_split())
+    #Hangman title
+    print(
+    "  ___ ___                                                     ______"
+    "_____              __               \n"
+    " /   |   \_____    ____    ____   _____ _____    ____         \__   "
+    " ___/____   __ ___/  |______   __ __ \n"
+    "/    ~    \__  \  /    \  / ___\ /     \\__  \  /    \   ______ |    |"
+    "  \__  \ |  |  \   __\__  \ |  |  \ \n"
+    "\    Y    // __ \|   |  \/ /_/  >  Y Y  \/ __ \|   |  \ /_____/ |    |"
+    "   / __ \|  |  /|  |  / __ \|  |  / \n"
+    " \___|_  /(____  /___|  /\___  /|__|_|  (____  /___|  /         |____|"
+    "  (____  /____/ |__| (____  /____/ \n"
+    "       \/      \/     \//_____/       \/     \/     \/                "
+    "       \/                 \/       ")
+    #give players options
+    print("1. Play with computer\n"
+          "2. Statistic\n"
+          "3. Help screen\n"
+          "4. Quit game\n")
+    choice = input(">> ")
+    try:
+        choice = int(choice)
+    except ValueError:
+        choice = input(">>")
+    if choice == 1:
+        print(main_game(game_difficulty(), import_and_split()))
+        main_menu()
+        statistics()
+    if choice == 2:
+        statistics()
+        main_menu()
+    if choice == 3:
+        print(Help())
+        main_menu()
+    if choice == 4:
+        print("Thank you for playing the game")
+    else:
+        print()
+print(main_menu())
+
